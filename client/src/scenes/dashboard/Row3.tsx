@@ -11,17 +11,13 @@ const Row3 = () => {
 
 
   const productColumns = [
+
     {
-      field: "_id",
-      headerName: "id",
+      field: "name",
+      headerName: "name",
       flex: 1,
     },
-    {
-      field: "expense",
-      headerName: "Expense",
-      flex: 0.5,
-      renderCell: (params: GridCellParams) => `$${params.value}`,
-    },
+
     {
       field: "price",
       headerName: "Price",
