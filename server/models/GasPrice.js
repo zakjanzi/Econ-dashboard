@@ -4,27 +4,27 @@ import { loadType } from "mongoose-currency";
 const Schema = mongoose.Schema;
 loadType(mongoose);
 
-const TransactionSchema = new Schema(
+const GasPriceSchema = new Schema(
   {
-    buyer: {
+    _id: {
       type: String,
-      required: true,
     },
-    amount: {
+  },
+  {
+    price: {
       type: mongoose.Types.Currency,
       currency: "USD",
       get: (v) => v / 100,
     },
-    productIds: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
+  },
+  {
+    name: {
+      type: String,
+    },
   },
   { timestamps: true, toJSON: { getters: true } }
 );
 
-const Transaction = mongoose.model("Transaction", TransactionSchema);
+const GasPrice = mongoose.model("gasPrice", GasPriceSchema);
 
-export default Transaction;
+export default GasPrice;

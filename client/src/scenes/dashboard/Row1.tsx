@@ -1,8 +1,6 @@
 import BoxHeader from "@/components/BoxHeader";
 import DashboardBox from "@/components/DashboardBox";
-import { 
-  // useGetKpisQuery, 
-  useGetDollarRateQuery } from "@/state/api";
+import { useGetKpisQuery } from "@/state/api";
 import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 import {
@@ -22,33 +20,33 @@ import {
 
 const Row1 = () => {
   const { palette } = useTheme();
-  const { data } = useGetDollarRateQuery();
+  const { data } = useGetKpisQuery();
   console.log("data: ", data)
 
-  // const revenue = useMemo(() => {
-  //   return (
-  //     data &&
-  //     data[0].monthlyData.map(({ month, revenue }) => {
-  //       return {
-  //         name: month.substring(0, 3),
-  //         revenue: revenue,
-  //       };
-  //     })
-  //   );
-  // }, [data]);
+  const revenue = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+        };
+      })
+    );
+  }, [data]);
 
-  // const revenueExpenses = useMemo(() => {
-  //   return (
-  //     data &&
-  //     data[0].monthlyData.map(({ month, revenue, expenses }) => {
-  //       return {
-  //         name: month.substring(0, 3),
-  //         revenue: revenue,
-  //         expenses: expenses,
-  //       };
-  //     })
-  //   );
-  // }, [data]);
+  const revenueExpenses = useMemo(() => {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        return {
+          name: month.substring(0, 3),
+          revenue: revenue,
+          expenses: expenses,
+        };
+      })
+    );
+  }, [data]);
 
   // const revenueProfit = useMemo(() => {
   //   return (
@@ -63,31 +61,31 @@ const Row1 = () => {
   //   );
   // }, [data]);
 
- const dollarRate = useMemo(() => {
-    return (
-      data &&
-      data.map(({ dateTime, usdToLbp }) => {
-        return {
-          name: dateTime,
-          rate: usdToLbp,
-        };
-      })
-    );
-  }, [data]);
+//  const dollarRate = useMemo(() => {
+//     return (
+//       data &&
+//       data.map(({ dateTime, usdToLbp }) => {
+//         return {
+//           name: dateTime,
+//           rate: usdToLbp,
+//         };
+//       })
+//     );
+//   }, [data]);
 
   return (
     <>
       <DashboardBox gridArea="a">
         <BoxHeader
-          title="Revenue and Expenses"
-          subtitle="top line represents revenue, bottom line represents expenses"
-          sideText="+4%"
+          title="USD - LBP Rate"
+          subtitle="Price of the USD at the current black market value. Data source: lirarate.org"
+          sideText=""
         />
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             width={500}
             height={400}
-            data={dollarRate}
+            data={revenueExpenses}
             margin={{
               top: 15,
               right: 25,
@@ -123,7 +121,7 @@ const Row1 = () => {
             </defs>
             <XAxis
               dataKey="dateTime"
-              tickLine={false}
+              tickLine={true}
               style={{ fontSize: "10px" }}
             />
             <YAxis
@@ -154,15 +152,15 @@ const Row1 = () => {
       </DashboardBox>
       <DashboardBox gridArea="b">
         <BoxHeader
-          title="Profit and Revenue"
-          subtitle="top line represents revenue, bottom line represents expenses"
+          title="Sayrafa Rate"
+          subtitle="The Sayrafa rate is used to price many services, including internet and phone bills. It's a scheme devised by the central bank to obtain USD at black market value."
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             width={500}
             height={400}
-            data={dollarRate}
+            data={revenue}
             margin={{
               top: 20,
               right: 0,
@@ -213,15 +211,15 @@ const Row1 = () => {
       </DashboardBox>
       <DashboardBox gridArea="c">
         <BoxHeader
-          title="Revenue Month by Month"
-          subtitle="graph representing the revenue month by month"
-          sideText="+4%"
+          title="Percentage Change (Monthly)"
+          subtitle="Inflation rate per month."
+          sideText="This month: +54%"
         />
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             width={500}
             height={300}
-            data={dollarRate}
+            data={revenueExpenses}
             margin={{
               top: 17,
               right: 15,

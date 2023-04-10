@@ -2,14 +2,14 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import {
   GetKpisResponse,
   GetProductsResponse,
-  GetTransactionsResponse,
+  GetGasPriceResponse,
   GetDollarRateResponse,
 } from "./types";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   reducerPath: "main",
-  tagTypes: ["Kpis", "Products", "Transactions", "Blackmarket"],
+  tagTypes: ["Kpis", "Products", "GasPrice", "Blackmarket"],
   endpoints: (build) => ({
     getKpis: build.query<Array<GetKpisResponse>, void>({
       query: () => "kpi/kpis/",
@@ -19,9 +19,9 @@ export const api = createApi({
       query: () => "product/products/",
       providesTags: ["Products"],
     }),
-    getTransactions: build.query<Array<GetTransactionsResponse>, void>({
-      query: () => "transaction/transactions/",
-      providesTags: ["Transactions"],
+    getGasPrice: build.query<Array<GetGasPriceResponse>, void>({
+      query: () => "gasPrice/gasPrices/",
+      providesTags: ["GasPrice"],
     }),
     getDollarRate: build.query<Array<GetDollarRateResponse>, void>({
       query: () => "blackmarket/blackmarkets/",
@@ -30,5 +30,5 @@ export const api = createApi({
   }),
 });
 
-export const { useGetKpisQuery, useGetProductsQuery, useGetTransactionsQuery, useGetDollarRateQuery } =
+export const { useGetKpisQuery, useGetProductsQuery, useGetGasPriceQuery, useGetDollarRateQuery } =
   api;
