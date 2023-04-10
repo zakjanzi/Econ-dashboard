@@ -165,7 +165,7 @@ const Row1 = () => {
               top: 20,
               right: 0,
               left: -10,
-              bottom: 55,
+              bottom: 80,
             }}
           >
             <CartesianGrid vertical={false} stroke={palette.grey[800]} />
@@ -188,12 +188,7 @@ const Row1 = () => {
               style={{ fontSize: "10px" }}
             />
             <Tooltip />
-            <Legend
-              height={20}
-              wrapperStyle={{
-                margin: "0 0 10px 0",
-              }}
-            />
+            
             <Line
               yAxisId="left"
               type="monotone"
@@ -209,7 +204,7 @@ const Row1 = () => {
           </LineChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea="c">
+      <DashboardBox gridArea="c" height={330}>
         <BoxHeader
           title="Percentage Change (Monthly)"
           subtitle="Inflation rate per month."

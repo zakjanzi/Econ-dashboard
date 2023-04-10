@@ -1608,18 +1608,22 @@ export const products = [
 
 export const gasPrice = [
   {
+    _id: "63bf7ac9f03239eb9d0016cgy",
     name: "octane95",
     price: "$154.37",
   },
   {
+    _id: "63bf7ac9f05539eb9d0016cc",
     name: "octane98",
     price: "$207.45",
   },
   {
+    _id: "63bf7ac9f05536sb9d0016cc",
     name: "diesel",
     price: "$207.45",
   },
   {
+    _id: "64gf7ac9f05539eb9d0016cc",
     name: "gas",
     price: "$207.45",
   },

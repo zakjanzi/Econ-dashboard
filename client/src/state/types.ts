@@ -57,6 +57,9 @@ export interface GetGasPriceResponse {
 
 
 export interface GetDollarRateResponse {
+  id: string;
+  _id: string;
+  __v: number;
   dateTime: string;
   usdToLbp: number;
 }
